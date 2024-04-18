@@ -44,7 +44,7 @@ BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL,  'color', [0 0.5 0.5],'LineWidth', 1.5);
 
 legend({'$\sigma=0$',"$\sigma=0.01$","$\sigma=0.05$","$\sigma=0.1$","$\sigma=0.2$",'$\sigma=0.3$',"$\sigma=0.4$","$\sigma=0.5$"},'interpreter','latex')
-saveas(gcf,"figure1",'epsc')
+saveas(gcf,"./figures/figure1",'epsc')
 
 
 
@@ -89,7 +89,7 @@ BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'r', 'LineWidth', 1.5);
 
 legend('One-hot [11]',"Z=1","Z=2",'Z=4','Z=8','Z=16','Z=32','Adaptive power scheduler','Interpreter', 'latex')
-saveas(gcf,"figure2",'epsc')
+saveas(gcf,"./figures/figure2",'epsc')
 
 
 
@@ -135,7 +135,7 @@ end
 set(gca,'FontName','Times New Roman')
 set(gca,'XTick',[])
 legend("Conventional supervised learning [11]","Input cyclic shifting","Input flipping","Input noise injection","Adaptive label augmentation","Our proposed approach", 'Interpreter', 'latex')
-saveas(gcf,"figure3",'epsc')
+saveas(gcf,"./figures/figure3",'epsc')
 
 
 % Performance comparison of our proposed approach and conventional supervised learning
@@ -166,7 +166,7 @@ set(gca,'XScale','log')
 xlim([16,4096])
 xticks([16,64,256,1024,4096])
 legend("Conventional supervised learning top-1 [11]","Conventional supervised learning top-3 [11]",'Our proposed approach top-1','Our proposed approach top-3','Interpreter', 'latex')
-saveas(gcf,"figure4",'epsc')
+saveas(gcf,"./figures/figure4",'epsc')
 
 
 
