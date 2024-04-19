@@ -132,16 +132,16 @@ for i=1:6
     b.CData(1,:)=color(i,:);
     set(b,'edgecolor','none')
 end
-set(gca,'FontName','Times New Roman')
 set(gca,'XTick',[])
 legend("Conventional supervised learning [11]","Input cyclic shifting","Input flipping","Input noise injection","Adaptive label augmentation","Our proposed approach", 'Interpreter', 'latex')
 saveas(gcf,"./figures/figure3",'epsc')
 
 
+
 % Performance comparison of our proposed approach and conventional supervised learning
 figure;
 hold on
-xlabel('Number of training data', 'interpreter', 'latex');
+xlabel('Size of training dataset', 'interpreter', 'latex');
 ylabel('Normalized beamforming gain $G_{\rm{N}}$', 'interpreter', 'latex');
 grid on;
 power_ratios = zeros(5, 4);
@@ -158,15 +158,16 @@ for k=0:1:4
     power_ratios(k+1, 3) = max(BL1);
     power_ratios(k+1, 4) = max(BL2);
 end
-plot([16,64,256,1024,4096], power_ratios(:, 1), 'b*-', 'LineWidth', 1.5);
-plot([16,64,256,1024,4096], power_ratios(:, 2), 'b*--', 'LineWidth', 1.5);
-plot([16,64,256,1024,4096], power_ratios(:, 3), 'ro-', 'LineWidth', 1.5);
-plot([16,64,256,1024,4096], power_ratios(:, 4), 'ro--', 'LineWidth', 1.5);
+plot([160,640,2560,10240,40960], power_ratios(:, 1), 'b*-', 'LineWidth', 1.5);
+plot([160,640,2560,10240,40960], power_ratios(:, 2), 'b*--', 'LineWidth', 1.5);
+plot([160,640,2560,10240,40960], power_ratios(:, 3), 'ro-', 'LineWidth', 1.5);
+plot([160,640,2560,10240,40960], power_ratios(:, 4), 'ro--', 'LineWidth', 1.5);
 set(gca,'XScale','log')
-xlim([16,4096])
-xticks([16,64,256,1024,4096])
+xlim([160,40960])
+xticks([160 640 2560 10240 40960])
+set(gca,'XMinorTick','off','XMinorGrid','off')
 legend("Conventional supervised learning top-1 [11]","Conventional supervised learning top-3 [11]",'Our proposed approach top-1','Our proposed approach top-3','Interpreter', 'latex')
-saveas(gcf,"./figures/figure4",'epsc')
+saveas(gcf,"figure4",'epsc')
 
 
 
