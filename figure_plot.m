@@ -167,7 +167,7 @@ xlim([160,40960])
 xticks([160 640 2560 10240 40960])
 set(gca,'XMinorTick','off','XMinorGrid','off')
 legend("Conventional supervised learning top-1 [11]","Conventional supervised learning top-3 [11]",'Our proposed approach top-1','Our proposed approach top-3','Interpreter', 'latex')
-saveas(gcf,"figure4",'epsc')
+saveas(gcf,"./figures/figure4",'epsc')
 
 
 
