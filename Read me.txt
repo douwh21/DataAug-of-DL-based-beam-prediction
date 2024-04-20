@@ -3,7 +3,7 @@ This folder includes deep learning codes and corresponding results.
 The folder is free to use, including dataset utilization, simulation result reproduction, model improvement, etc.
 
 Note:
-1. Environment: Pytorch, Python 3.11.5.
+1. Environment: Pytorch, Python 3.11.5. MATLAB R2022b.
 2. Run train_beam_conventional.py to start simulations of conventional supervised learning. Reference: K. Ma, et al., Deep Learning Assisted Calibrated Beam Training for Millimeter-Wave Communication Systems.
-3. Run train_beam_ourapproach.py to start simuilations of our proposed approach.
+3. Run train_beam_ourapproach.py to start simulations of our proposed approach.
 4. Run figure_plot.m to obtain simulation results.
