@@ -1,3 +1,4 @@
 The folder includes training results.
 Note:
 1. Environment: MATLAB R2022b.
+2. For all the file names in this folder, the first number after "supervised_" denotes the size of training dataset, and other numbers represent parameters defined in our paper.

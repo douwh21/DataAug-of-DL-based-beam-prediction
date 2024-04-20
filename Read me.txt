@@ -1,9 +1,12 @@
 This folder includes deep learning codes and corresponding results.
 
 The folder is free to use, including dataset utilization, simulation result reproduction, model improvement, etc.
+For academic use, please cite the reference below:
+[1] Wenhan Dou et al., "Efficient Learning for mmWave Beam Prediction with Limited Dataset: A Data Augmentation Based Approach," submitted to IEEE GLOBECOM 2024.
 
 Note:
 1. Environment: Pytorch, Python 3.11.5. MATLAB R2022b.
-2. Run train_beam_conventional.py to start simulations of conventional supervised learning. Reference: K. Ma, et al., Deep Learning Assisted Calibrated Beam Training for Millimeter-Wave Communication Systems.
+2. Run train_beam_conventional.py to start simulations of conventional supervised learning. 
+Reference: K. Ma, et al., Deep Learning Assisted Calibrated Beam Training for Millimeter-Wave Communication Systems.
 3. Run train_beam_ourapproach.py to start simulations of our proposed approach.
 4. Run figure_plot.m to obtain simulation results.
