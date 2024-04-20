@@ -1,6 +1,5 @@
 import argparse
 import os
-import random
 import time
 
 import numpy as np
@@ -19,7 +18,7 @@ parser.add_argument(
     "--epochs", default=4000, type=int, metavar="N", help="number of total epochs to run"
 )
 parser.add_argument(
-    "--batch-size", default=16, type=int, metavar="N", help="train batchsize"
+    "--batch-size", default=160, type=int, metavar="N", help="train batchsize"
 )
 parser.add_argument(
     "--lr",
@@ -29,8 +28,7 @@ parser.add_argument(
     metavar="LR",
     help="initial learning rate",
 )
-# Miscs
-parser.add_argument("--manualSeed", type=int, default=0, help="manual seed")
+
 # Device options
 parser.add_argument(
     "--gpu", default="0", type=str, help="id(s) for CUDA_VISIBLE_DEVICES"
@@ -52,20 +50,18 @@ os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 use_cuda = torch.cuda.is_available()
 
 # Random seed
-if args.manualSeed is None:
-    args.manualSeed = random.randint(1, 10000)
 np.random.seed(int(time.time()))
 
 # Input augmentation
-def inputaugmentation(data, label, beam_power, device):
+def InputAugmentation(data, label, beam_power, device):
     a, b, c, d = data.shape
 
     # Random Cyclic Shift
     if np.random.rand() < args.p:
-        m = np.random.randint(0, d)
-        data = data.roll(m, -1)
-        label = (label + 4 * m) % 64
-        beam_power = beam_power.roll(4 * m, -1)
+        t = np.random.randint(0, d)
+        data = data.roll(t, -1)
+        label = (label + 4 * t) % 64
+        beam_power = beam_power.roll(4 * t, -1)
 
     # Random Flip
     if np.random.rand() < args.p:
@@ -82,7 +78,7 @@ def inputaugmentation(data, label, beam_power, device):
 
 
 # Label augmentation
-def labelaugmentation(beam_power, labels,epoch, device):
+def LabelAugmentation(beam_power, labels,epoch, device):
     if args.Zf == 0:
         # One-hot
         newlabels = (
@@ -92,19 +88,19 @@ def labelaugmentation(beam_power, labels,epoch, device):
         )
     else:
         # Adaptive power scheduler
-        Z = linear_rampup(epoch)
+        Z = Linear_Rampup(epoch)
         newlabels = beam_power**(Z/2)
     return newlabels
 
 
-def linear_rampup(current, rampup_length=args.epochs):
+def Linear_Rampup(current, rampup_length=args.epochs):
     if rampup_length == 0:
         return 1.0
     else:
         current = np.clip(args.Z0 + current / rampup_length * args.Zf * args.k, 0.0, args.Zf)
         return float(current)
     
-class crossentropy(object):
+class CrossEntropy(object):
     def __call__(self, outputs_x, targets_x):
         Lx = -torch.mean(torch.sum(F.log_softmax(outputs_x, dim=1) * targets_x, dim=1))
         return Lx
@@ -127,13 +123,13 @@ def eval(model, loader):
     running_loss = 0
     # count batch number
     batch_num = 0
-    batch_size = 16
+    batch_size = int(args.batch_size / 10)
 
     # evaluate validation set
     while not done:
         # read files
         (
-            channel2,
+            channel,
             beam_power_nonoise_m,
             label_nonoise_m,
             done,
@@ -141,8 +137,8 @@ def eval(model, loader):
         ) = loader.next_batch()
         if count==True:
             batch_num += 1
-            # channel2: proposed by using wide beams
-            out_tensor = model(channel2)
+            # channel: proposed by using wide beams
+            out_tensor = model(channel)
             loss = 0
             # average loss of all predictions
             for loss_count in range(10):
@@ -192,8 +188,6 @@ def eval(model, loader):
 
 
 def main():
-    # learning rate
-    lr = args.lr
     version_name = (
         "supervised_{}_ourapproach_lr={}_p={}_Zf={}_Z0={}_k={}_sigma={}".format(
             args.n, args.lr,  args.p, args.Zf, args.Z0, args.k, args.sigma
@@ -201,12 +195,14 @@ def main():
     )
     info = "DataAug_64beam_" + version_name
     print(info)
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if use_cuda else "cpu")
 
     # training time
     t = 5
     # training epoch
     epoch = args.epochs
+    # learning rate
+    lr = args.lr
     # batch size
     batch_size = args.batch_size
     print("batch_size:%d" % (batch_size))
@@ -220,7 +216,7 @@ def main():
     )
 
     # loss function
-    criterion = crossentropy()
+    criterion = CrossEntropy()
 
     # for evaluation
     acur_eval = np.zeros(( t, epoch))
@@ -261,7 +257,7 @@ def main():
             while not done:
                 # read files
                 (
-                    labeled_data,
+                    input_signal,
                     beam_power_nonoise,
                     labels_nonoise,
                     done,
@@ -270,10 +266,12 @@ def main():
 
                 if count == True:
                     batch_num += 1
-                    inputs_x, targets_x, beam_power_nonoise = inputaugmentation(
-                        labeled_data, labels_nonoise, beam_power_nonoise, device
+                    # Input augmentation
+                    inputs_x, targets_x, beam_power_nonoise = InputAugmentation(
+                        input_signal, labels_nonoise, beam_power_nonoise, device
                     )
-                    targets_x = labelaugmentation(beam_power_nonoise, targets_x, e, device)
+                    # Label augmentation
+                    targets_x = LabelAugmentation(beam_power_nonoise, targets_x, e, device)
                     # predicted probabilities
                     out_tensor = model(inputs_x).transpose(0, 1)
                     loss = 0

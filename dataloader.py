@@ -9,22 +9,25 @@ DATACOUNT_PER_FILE = 256
 
 class Dataloader:
     # initialization
-    def __init__(self, path="", batch_size=32, device="cpu", datacount=40960):
-        self.batch_size = batch_size
+    def __init__(self, path="", batch_size=160, device="cpu", datacount=40960):
+        self.batch_size = int(batch_size / 10)
         self.device = device
         self.filenum = int(datacount / 10) // DATACOUNT_PER_FILE 
         self.datanum = int(datacount / 10)  % DATACOUNT_PER_FILE
         # count file names
         self.files = [join(path, f) for f in listdir(path) if isfile(join(path, f))]
+        for i, f in enumerate(self.files):
+            if not f.split(".")[-1] == "mat":
+                del self.files[i]
+
+        #for training
         if "train" in path:
             self.files.sort()
             if self.datanum == 0:
                 self.files = self.files[0:self.filenum]
             else:
                 self.files = self.files[0:self.filenum + 1]
-        for i, f in enumerate(self.files):
-            if not f.split(".")[-1] == "mat":
-                del self.files[i]
+                
         self.reset()
 
     # reset buffers
@@ -35,7 +38,7 @@ class Dataloader:
         self.buffer_label_nonoise_m = np.zeros((0, 10))
         self.buffer_beam_power_nonoise_m = np.zeros((0, 10, 64))
 
-    # load files
+    # load all the data from one file
     def load(self, file):
         data = sio.loadmat(file)
 
