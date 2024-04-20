@@ -1,7 +1,7 @@
 import torch
-import torchvision
 import torch.nn as nn
 import torch.nn.functional as F
+
 
 class Model_3D(nn.Module):
 
@@ -17,8 +17,6 @@ class Model_3D(nn.Module):
                                kernel_size=(1,3), stride=(1,1), padding=(0,1))
         self.bn2 = nn.BatchNorm2d(256)
 
-        # if proposed LSTM assisted scheme
-        #self.lstm = nn.LSTM(input_size=256, hidden_size=256, num_layers=2, dropout=0.2)
         self.fc = nn.Linear(256, 64)
         self.drop = nn.Dropout(0.3)
 
@@ -34,21 +32,12 @@ class Model_3D(nn.Module):
         x = self.bn2(x)
         x = F.relu(x)
 
-        # if 0:
         P_dim_size = x.shape[3]
         x = nn.MaxPool2d(kernel_size=(1, P_dim_size))(x)
         x = torch.squeeze(x)
 
         x = x.permute(2, 0, 1)
 
-        # if proposed LSTM assisted scheme
-        #y = self.lstm(x)
-        #y = y[0]
-        #y1 = y
-        #y1 = self.drop(y1)
-        #y1 = self.fc(y1)
-
-        # if baseline 2 or proposed CNN assisted scheme
         y1 = self.drop(x)
         y1 = self.fc(y1)
 

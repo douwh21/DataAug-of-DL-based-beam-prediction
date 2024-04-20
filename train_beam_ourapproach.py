@@ -8,7 +8,8 @@ import scipy.io as sio
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.optim 
+import torch.optim
+
 from dataloader import Dataloader
 from model_3Dcov_basic import Model_3D
 
@@ -35,7 +36,7 @@ parser.add_argument(
     "--gpu", default="0", type=str, help="id(s) for CUDA_VISIBLE_DEVICES"
 )
 # Method options
-parser.add_argument("--n", type=int, default=64, help="Number of training data")
+parser.add_argument("--n", type=int, default=640, help="Number of training data")
 parser.add_argument("--p", default=0.5, type=float, help="the probability of input augmentation methods")
 parser.add_argument("--sigma", default=0.3, type=float, help="the standard variance of noise injection")
 parser.add_argument("--Zf", default=8.0, type=float, help="the maximum value of Z")
@@ -212,7 +213,7 @@ def main():
 
     # training set and validation set
     loader = Dataloader(
-        path="./dataset/training", batch_size=batch_size, device=device, n=args.n
+        path="./dataset/training", batch_size=batch_size, device=device, datacount=args.n
     )
     eval_loader = Dataloader(
         path="./dataset/testing", batch_size=batch_size, device=device

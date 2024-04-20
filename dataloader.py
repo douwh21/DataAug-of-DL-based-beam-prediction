@@ -1,6 +1,3 @@
-import math
-import os
-from collections import Counter
 from os import listdir
 from os.path import isfile, join
 
@@ -12,26 +9,19 @@ DATACOUNT_PER_FILE = 256
 
 class Dataloader:
     # initialization
-    def __init__(self, path="", batch_size=32, device="cpu", datacount=4096):
+    def __init__(self, path="", batch_size=32, device="cpu", datacount=40960):
         self.batch_size = batch_size
         self.device = device
-        self.filenum = datacount // DATACOUNT_PER_FILE 
-        self.datanum = datacount % DATACOUNT_PER_FILE
+        self.filenum = int(datacount / 10) // DATACOUNT_PER_FILE 
+        self.datanum = int(datacount / 10)  % DATACOUNT_PER_FILE
         # count file names
         self.files = [join(path, f) for f in listdir(path) if isfile(join(path, f))]
         if "train" in path:
-            print("训练")
             self.files.sort()
             if self.datanum == 0:
                 self.files = self.files[0:self.filenum]
             else:
                 self.files = self.files[0:self.filenum + 1]
-            print(len(self.files))
-            print(self.datanum)
-            print(self.filenum)
-        else:
-            print("验证")
-            print(len(self.files))
         for i, f in enumerate(self.files):
             if not f.split(".")[-1] == "mat":
                 del self.files[i]
@@ -59,7 +49,6 @@ class Dataloader:
 
         # for training
         if self.datanum!=0 and len(self.unvisited_files) == 0:
-            print("the last file")
             channel = channel[0 : 0 + self.datanum]
             labels_nonoise = labels_nonoise[0 : 0 + self.datanum]
             beam_power_nonoise_m = beam_power_nonoise_m[0 : 0 + self.datanum]

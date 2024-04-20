@@ -4,42 +4,42 @@ hold on;
 xlabel('Epoch', 'interpreter', 'latex');
 ylabel('Normalized beamforming gain $G_{\rm{N}}$', 'interpreter', 'latex');
 grid on;
-load('./evaluation/DataAug_64beam_supervised_64_lr=0.03_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_lr=0.03_evaluation.mat');
 markersize = 10;
 BL = mean(squeeze(mean(BL_eval(:,1,:,:), 1)), 1);
 plot(1:length(BL), BL,'LineWidth', 1.5,'Color','c');
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.01_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.01_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL,'m','LineWidth', 1.5);
 
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.05_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.05_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'g','LineWidth', 1.5);
 
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.1_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.1_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'Color',[0.8500 0.3250 0.0980], 'LineWidth', 1.5);
 
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.2_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.2_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'color', [0.5 0 0.5], 'LineWidth', 1.5)
 
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.3_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.3_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'r', 'LineWidth', 1.5)
 
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.4_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.4_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL,'b',  'LineWidth', 1.5);
 
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.5_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.5_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL,  'color', [0 0.5 0.5],'LineWidth', 1.5);
 
@@ -54,37 +54,37 @@ hold on;
 xlabel('Epoch', 'interpreter', 'latex');
 ylabel('Normalized beamforming gain $G_{\rm{N}}$', 'interpreter', 'latex');
 grid on;
-load('./evaluation/DataAug_64beam_supervised_64_lr=0.03_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_lr=0.03_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval(:,1,:,:), 1)), 1);
 plot(1:length(BL), BL,'Color',[0.8500 0.3250 0.0980],'LineWidth', 1.5);
 
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Z=1.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Z=1.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL,'m','LineWidth', 1.5);
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Z=2.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Z=2.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'g','LineWidth', 1.5);
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Z=4.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Z=4.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'b',  'LineWidth', 1.5);
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Z=8.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Z=8.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL,  'color', [0 0.5 0.5], 'LineWidth', 1.5);
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Z=16.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Z=16.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'color', [0.5 0 0.5], 'LineWidth', 1.5)
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Z=32.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Z=32.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'color', [0.5 0.5 0],'LineWidth', 1.5);
 
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Zf=8.0_Z0=2.0_k=6.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Zf=8.0_Z0=2.0_k=6.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'r', 'LineWidth', 1.5);
 
@@ -101,27 +101,27 @@ ylabel('Normalized beamforming gain $G_{\rm{N}}$', 'interpreter', 'latex');
 grid on;
 Gn = zeros(1,6);
 
-load('./evaluation/DataAug_64beam_supervised_64_lr=0.03_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_lr=0.03_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval(:,1,:,:), 1)), 1);
 Gn(1)=max(BL);
 
-load('./evaluation/DataAug_64beam_supervised_64_cyclicshift_lr=0.03_p=0.5_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_cyclicshift_lr=0.03_p=0.5_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 Gn(2)=max(BL);
 
-load('./evaluation/DataAug_64beam_supervised_64_flipping_lr=0.03_p=0.5_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_flipping_lr=0.03_p=0.5_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 Gn(3)=max(BL);
 
-load('./evaluation/DataAug_64beam_supervised_64_noiseinjection_lr=0.03_p=0.5_sigma=0.3_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_noiseinjection_lr=0.03_p=0.5_sigma=0.3_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 Gn(4)=max(BL);
 
-load('./evaluation/DataAug_64beam_supervised_64_labelaug_lr=0.03_Zf=8.0_Z0=2.0_k=6.0_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Zf=8.0_Z0=2.0_k=6.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 Gn(5)=max(BL);
 
-load('./evaluation/DataAug_64beam_supervised_64_ourapproach_lr=0.03_p=0.5_Zf=8.0_Z0=2.0_k=6.0_sigma=0.3_evaluation.mat');
+load('./evaluation/DataAug_64beam_supervised_640_ourapproach_lr=0.03_p=0.5_Zf=8.0_Z0=2.0_k=6.0_sigma=0.3_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval(:,1,:,:), 1)), 1);
 Gn(6)=max(BL);
 
@@ -146,7 +146,7 @@ ylabel('Normalized beamforming gain $G_{\rm{N}}$', 'interpreter', 'latex');
 grid on;
 power_ratios = zeros(5, 4);
 for k=0:1:4
-    count=16*4^k;
+    count=160*4^k;
     load(['./evaluation/DataAug_64beam_supervised_' num2str(count) '_lr=0.03_evaluation.mat']);
     BL1 = mean(squeeze(mean(BL_eval(:,1,:,:), 1)), 1);
     BL2 = mean(squeeze(mean(BL_eval(:,3,:,:), 1)), 1);
