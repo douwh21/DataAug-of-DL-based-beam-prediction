@@ -43,7 +43,7 @@ class Dataloader:
         data = sio.loadmat(file)
 
         # channel: proposed by using wide beams
-        channel = data["channel_data2"]
+        channel = data["channel"]
         channel = np.transpose(channel, (1, 0, 2, 3))
         # evaluation label with no noise
         labels_nonoise = data["max_id_sery_no_noise_m"] - 1
