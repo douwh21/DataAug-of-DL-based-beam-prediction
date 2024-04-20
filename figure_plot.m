@@ -83,7 +83,6 @@ load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Z=32.0_evaluat
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'color', [0.5 0.5 0],'LineWidth', 1.5);
 
-
 load('./evaluation/DataAug_64beam_supervised_640_labelaug_lr=0.03_Zf=8.0_Z0=2.0_k=6.0_evaluation.mat');
 BL = mean(squeeze(mean(BL_eval, 1)), 1);
 plot(1:length(BL), BL, 'r', 'LineWidth', 1.5);

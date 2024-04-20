@@ -303,7 +303,6 @@ def main():
                 model_name = info + "_" + str(tt) + "_MODEL.pkl"
                 torch.save(model, model_name)
 
-
             # train mode, where dropout is on
             model.train()
 

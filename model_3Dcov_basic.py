@@ -16,7 +16,6 @@ class Model_3D(nn.Module):
         self.conv2 = nn.Conv2d(in_channels=64, out_channels=256,
                                kernel_size=(1,3), stride=(1,1), padding=(0,1))
         self.bn2 = nn.BatchNorm2d(256)
-
         self.fc = nn.Linear(256, 64)
         self.drop = nn.Dropout(0.3)
 

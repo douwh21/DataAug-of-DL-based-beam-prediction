@@ -170,7 +170,7 @@ def main():
         max_BL= 0
         # Adam optimizer
         optimizer = torch.optim.Adam(
-            model.parameters(), args.lr / 10, betas=(0.9, 0.999)
+            model.parameters(), lr / 10, betas=(0.9, 0.999)
         )  # use the sum of 10 losses
 
         # print parameters
