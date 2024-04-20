@@ -1,1 +1,1 @@
-This folder includes dataset for trainning and testing.
+This folder includes dataset for training and testing.
