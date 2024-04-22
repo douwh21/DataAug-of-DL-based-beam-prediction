@@ -10,3 +10,4 @@ Note:
 Reference: K. Ma, et al., Deep Learning Assisted Calibrated Beam Training for Millimeter-Wave Communication Systems.
 3. Run train_beam_ourapproach.py to start simulations of our proposed approach.
 4. Run figure_plot.m to obtain simulation results.
+5. The files getpos.m, hatchfill2.m, and legendflex.m are utilized to assist in drawing the results.
